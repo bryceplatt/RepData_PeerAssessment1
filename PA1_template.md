@@ -4,7 +4,6 @@
 ## Loading and preprocessing the data
 
 ```r
-<<<<<<< HEAD
 unzip("activity.zip",list=T)
 ```
 
@@ -15,7 +14,6 @@ unzip("activity.zip",list=T)
 
 ```r
 =======
->>>>>>> 764e19b0ef36239d278734bdc8023fa8a0929868
 unzip("activity.zip")
 d <- read.csv("activity.csv",header=T)
 ```
@@ -23,18 +21,15 @@ d <- read.csv("activity.csv",header=T)
 
 
 ```r
-<<<<<<< HEAD
 steps_taken_per_day <- tapply(d$steps,as.factor(d$date),sum)
 hist(steps_taken_per_day)
 =======
 hist(tapply(d$steps,as.factor(d$date),mean))
->>>>>>> 764e19b0ef36239d278734bdc8023fa8a0929868
 ```
 
 ![plot of chunk unnamed-chunk-2](figure/unnamed-chunk-2.png) 
 
 ```r
-<<<<<<< HEAD
 mean(steps_taken_per_day,na.rm = T)
 ```
 
@@ -69,7 +64,6 @@ median(tapply(d$steps,as.factor(d$date),mean),na.rm = T)
 ```
 
 The mean and median are 37.38
->>>>>>> 764e19b0ef36239d278734bdc8023fa8a0929868
 
 ## What is the average daily activity pattern?
 
@@ -78,20 +72,16 @@ The mean and median are 37.38
 require("ggplot2")
 require("plyr")
 summary_by_interval <- ddply(d,.(interval),summarize,Total=sum(steps,na.rm=T),Mean=mean(steps,na.rm=T),Median=median(steps, na.rm=T))
-<<<<<<< HEAD
 qplot(data = summary_by_interval,x=interval, y=Mean,geom = "line", ylab = "Average number of steps over the 2 months")
 =======
 ggplot(summary_by_interval, aes(x=interval, y=Mean)) + geom_line()
->>>>>>> 764e19b0ef36239d278734bdc8023fa8a0929868
 ```
 
 ![plot of chunk unnamed-chunk-3](figure/unnamed-chunk-3.png) 
 
 ```r
-<<<<<<< HEAD
 # Looking up the 5-minute interval that, on average, contains the maximum number of steps
 =======
->>>>>>> 764e19b0ef36239d278734bdc8023fa8a0929868
 summary_by_interval$interval[summary_by_interval$Mean == max(summary_by_interval$Mean)]
 ```
 
@@ -102,11 +92,7 @@ The interval 835 has the highest average number of steps across all days for the
 
 ## Imputing missing values
 
-<<<<<<< HEAD
 1. There are 2304 NA values in original dataset
-=======
-1. There are 2304 NA values in out dataset
->>>>>>> 764e19b0ef36239d278734bdc8023fa8a0929868
 
 ```r
 summary(d)
@@ -124,18 +110,13 @@ summary(d)
 ```
 <<<<<<< HEAD
 2. To 'fill in' the NA values in this dataset, I will use the mean value for the given interval. This will be done by using a for loop to look at each row. For each row, if the steps value is NA, the function will look up the mean value for that interval in a summary table that has the total number or steps, mean, and median calculated for each interval.
-=======
-2. To 'fill in' the NA values in this dataset, I will use the median value for the given interval. 
->>>>>>> 764e19b0ef36239d278734bdc8023fa8a0929868
 
-3. New dataset with the NA's filled in using the mean for the interval
+3. New dataset with the NA's filled in using the mean for the interval:
 
 ```r
 summary_by_interval <- ddply(d,.(interval),summarize,Total=sum(steps,na.rm=T),Mean=mean(steps,na.rm=T),Median=median(steps, na.rm=T))
-<<<<<<< HEAD
+
 # d2 will be my new table with all NA values replaced with mean values.
-=======
->>>>>>> 764e19b0ef36239d278734bdc8023fa8a0929868
 d2 <- d
 for (i in 1:nrow(d2)) {
   if(is.na(d2[i,1])) {
@@ -170,7 +151,6 @@ summary(d2)
 ##                  (Other)   :15840
 ```
 
-<<<<<<< HEAD
 4. The difference between the mean and median for the data set with the missing values and the data set without is very small.
 
 
@@ -178,19 +158,15 @@ summary(d2)
 # The total number of steps per day using dataset without missing values.
 steps_taken_per_day_filled_na <- tapply(d2$steps,as.factor(d2$date),sum)
 hist(steps_taken_per_day_filled_na)
-=======
-4. The difference between the mean and median for the data set with the missing values and the date set is very close to zero.
 
 
 ```r
 hist(tapply(d2$steps,as.factor(d2$date),mean))
->>>>>>> 764e19b0ef36239d278734bdc8023fa8a0929868
 ```
 
 ![plot of chunk unnamed-chunk-6](figure/unnamed-chunk-6.png) 
 
 ```r
-<<<<<<< HEAD
 mean(steps_taken_per_day_filled_na)
 ```
 
@@ -209,25 +185,6 @@ median(steps_taken_per_day_filled_na)
 ```r
 # Calculating the difference between the mean and median for the dataset with missing values and the dataset without.
 mean(steps_taken_per_day_filled_na) - mean(steps_taken_per_day,na.rm=T) 
-=======
-mean(tapply(d2$steps,as.factor(d2$date),mean))
-```
-
-```
-## [1] 37.38
-```
-
-```r
-median(tapply(d2$steps,as.factor(d2$date),mean))
-```
-
-```
-## [1] 37.38
-```
-
-```r
-mean(tapply(d2$steps,as.factor(d2$date),mean)) - mean(tapply(d$steps,as.factor(d$date),mean),na.rm=T) 
->>>>>>> 764e19b0ef36239d278734bdc8023fa8a0929868
 ```
 
 ```
@@ -235,20 +192,13 @@ mean(tapply(d2$steps,as.factor(d2$date),mean)) - mean(tapply(d$steps,as.factor(d
 ```
 
 ```r
-<<<<<<< HEAD
 median(steps_taken_per_day_filled_na) - median(steps_taken_per_day,na.rm=T) 
 ```
 
 ```
 ## [1] 1.189
-=======
-median(tapply(d2$steps,as.factor(d2$date),mean)) - median(tapply(d$steps,as.factor(d$date),mean),na.rm=T) 
 ```
 
-```
-## [1] 0.004127
->>>>>>> 764e19b0ef36239d278734bdc8023fa8a0929868
-```
 
 ## Are there differences in activity patterns between weekdays and weekends?
 
@@ -257,10 +207,7 @@ Overall, the trend seems to be that this individual moves more durring the weeke
 
 ```r
 require("timeDate")
-<<<<<<< HEAD
 # d2 is same dataframe as RAW data but with all NA's replaced with mean of interval (See Imputing missing values #3)
-=======
->>>>>>> 764e19b0ef36239d278734bdc8023fa8a0929868
 d2$typeday <- as.factor(isWeekday(d2$date))
 levels(d2$typeday) <- list(weekend = "FALSE", weekday = "TRUE")
 qplot(x = interval,y = steps, data = d2 , facets = (typeday~.),geom = "line",stat = 'summary', fun.y = 'mean', main = "Activity Patterns between weekdays vs weekends",xlab = "Interval (in 5min increments)", ylab = "Number of Steps (Averaged over 2 month period)")
