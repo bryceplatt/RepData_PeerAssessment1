@@ -23,8 +23,6 @@ d <- read.csv("activity.csv",header=T)
 ```r
 steps_taken_per_day <- tapply(d$steps,as.factor(d$date),sum)
 hist(steps_taken_per_day)
-=======
-hist(tapply(d$steps,as.factor(d$date),mean))
 ```
 
 ![plot of chunk unnamed-chunk-2](figure/unnamed-chunk-2.png) 
@@ -47,23 +45,6 @@ median(steps_taken_per_day,na.rm = T)
 
 Mean: 10766.19
 Median: 10765
-=======
-mean(tapply(d$steps,as.factor(d$date),mean),na.rm = T)
-```
-
-```
-## [1] 37.38
-```
-
-```r
-median(tapply(d$steps,as.factor(d$date),mean),na.rm = T)
-```
-
-```
-## [1] 37.38
-```
-
-The mean and median are 37.38
 
 ## What is the average daily activity pattern?
 
@@ -73,8 +54,6 @@ require("ggplot2")
 require("plyr")
 summary_by_interval <- ddply(d,.(interval),summarize,Total=sum(steps,na.rm=T),Mean=mean(steps,na.rm=T),Median=median(steps, na.rm=T))
 qplot(data = summary_by_interval,x=interval, y=Mean,geom = "line", ylab = "Average number of steps over the 2 months")
-=======
-ggplot(summary_by_interval, aes(x=interval, y=Mean)) + geom_line()
 ```
 
 ![plot of chunk unnamed-chunk-3](figure/unnamed-chunk-3.png) 
@@ -108,7 +87,7 @@ summary(d)
 ##  Max.   :806.0   2012-10-06:  288   Max.   :2355  
 ##  NA's   :2304    (Other)   :15840
 ```
-<<<<<<< HEAD
+
 2. To 'fill in' the NA values in this dataset, I will use the mean value for the given interval. This will be done by using a for loop to look at each row. For each row, if the steps value is NA, the function will look up the mean value for that interval in a summary table that has the total number or steps, mean, and median calculated for each interval.
 
 3. New dataset with the NA's filled in using the mean for the interval:
@@ -158,10 +137,6 @@ summary(d2)
 # The total number of steps per day using dataset without missing values.
 steps_taken_per_day_filled_na <- tapply(d2$steps,as.factor(d2$date),sum)
 hist(steps_taken_per_day_filled_na)
-
-
-```r
-hist(tapply(d2$steps,as.factor(d2$date),mean))
 ```
 
 ![plot of chunk unnamed-chunk-6](figure/unnamed-chunk-6.png) 
