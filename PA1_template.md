@@ -13,7 +13,6 @@ unzip("activity.zip",list=T)
 ```
 
 ```r
-=======
 unzip("activity.zip")
 d <- read.csv("activity.csv",header=T)
 ```
@@ -60,7 +59,6 @@ qplot(data = summary_by_interval,x=interval, y=Mean,geom = "line", ylab = "Avera
 
 ```r
 # Looking up the 5-minute interval that, on average, contains the maximum number of steps
-=======
 summary_by_interval$interval[summary_by_interval$Mean == max(summary_by_interval$Mean)]
 ```
 
