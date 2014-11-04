@@ -32,7 +32,7 @@ The mean and median are 37.38
 >>>>>>> 764e19b0ef36239d278734bdc8023fa8a0929868
 
 ## What is the average daily activity pattern?
-
+ 
 ```{r,echo=TRUE}
 require("ggplot2")
 require("plyr")
