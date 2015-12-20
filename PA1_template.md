@@ -4,6 +4,7 @@
 ## Loading and preprocessing the data
 
 ```r
+download.file("http://d396qusza40orc.cloudfront.net/repdata%2Fdata%2Factivity.zip","activity.zip")
 unzip("activity.zip",list=T)
 ```
 
